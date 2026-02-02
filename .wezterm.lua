@@ -95,7 +95,7 @@ config.keys = {
     mods = "SUPER",
     action = act.SpawnCommandInNewWindow({
       cwd = os.getenv("WEZTERM_CONFIG_DIR"),
-      args = { os.getenv("SHELL"), "-c", "$EDITOR $WEZTERM_CONFIG_FILE" },
+      args = { os.getenv("SHELL"), "-c", "${EDITOR:-cursor} $WEZTERM_CONFIG_FILE || ${EDITOR:-code} $WEZTERM_CONFIG_FILE || vim $WEZTERM_CONFIG_FILE" },
     }),
   },
 }
