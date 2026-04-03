@@ -33,6 +33,15 @@ ensure_brew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
+ensure_oh_my_zsh() {
+  if [ -d "$HOME/.oh-my-zsh" ]; then
+    return
+  fi
+
+  log "Installing Oh My Zsh"
+  git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+}
+
 brew_shellenv() {
   if [ -x /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -65,6 +74,7 @@ link_file() {
 ensure_xcode_clt
 ensure_brew
 brew_shellenv
+ensure_oh_my_zsh
 
 log "Installing Homebrew packages"
 brew bundle --file "$repo_root/Brewfile"

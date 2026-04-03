@@ -11,12 +11,6 @@ export EDITOR="${EDITOR:-vim}"
 export VISUAL="${VISUAL:-$EDITOR}"
 export PAGER="${PAGER:-less}"
 
-alias gs='git status --short --branch'
-alias gd='git diff'
-alias gl='git log --oneline --decorate --graph --max-count=20'
-alias ll='eza -lah --icons'
-alias la='eza -a --icons'
-
 if command -v brew >/dev/null 2>&1; then
   BREW_PREFIX="$(brew --prefix)"
   fpath=("${BREW_PREFIX}/share/zsh/site-functions" $fpath)
@@ -29,3 +23,16 @@ if command -v brew >/dev/null 2>&1; then
     source "${BREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
   fi
 fi
+
+if [ -d "$HOME/.oh-my-zsh" ]; then
+  export ZSH="$HOME/.oh-my-zsh"
+  ZSH_THEME=""
+  plugins=(git)
+  source "$ZSH/oh-my-zsh.sh"
+fi
+
+alias gs='git status --short --branch'
+alias gd='git diff'
+alias gl='git log --oneline --decorate --graph --max-count=20'
+alias ll='eza -lah --icons'
+alias la='eza -a --icons'

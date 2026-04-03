@@ -30,7 +30,7 @@ Existing home files are backed up before being replaced.
 
 ## Shell Setup
 
-[`./.zprofile`](./.zprofile) sets up Homebrew for login shells. [`./.zshrc`](./.zshrc) loads the autosuggestions and syntax-highlighting plugins and sets a few practical aliases.
+[`./.zprofile`](./.zprofile) sets up Homebrew for login shells. [`./.zshrc`](./.zshrc) loads the autosuggestions and syntax-highlighting plugins, enables the `oh-my-zsh` `git` plugin when `~/.oh-my-zsh` is present, and keeps a few practical custom aliases on top.
 
 If you want Homebrew `zsh` as your login shell, set it explicitly after bootstrap. The repo does not change your account shell for you.
 
@@ -41,7 +41,7 @@ Both WezTerm and Ghostty are tracked in this repo and linked by bootstrap, so yo
 The current WezTerm config keeps the same basic preferences:
 
 - MesloLGS Nerd Font Mono at size 19
-- `tokyonight_night`
+- `TokyoNight Night`
 - opacity and blur enabled
 - tab bar and pane navigation bindings
 - `eza`/`bat` friendly shell setup

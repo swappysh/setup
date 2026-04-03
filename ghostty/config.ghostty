@@ -2,7 +2,7 @@
 
 font-family = MesloLGS Nerd Font Mono
 font-size = 19
-theme = tokyonight_night
+theme = TokyoNight Night
 
 window-decoration = auto
 macos-titlebar-style = transparent
