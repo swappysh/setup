@@ -31,18 +31,11 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
   source "$ZSH/oh-my-zsh.sh"
 fi
 
-# Shell aliases carried over from the old bash setup.
-if [ -x /opt/homebrew/bin/nano ]; then
-  alias nano='/opt/homebrew/bin/nano'
-elif [ -x /usr/local/bin/nano ]; then
-  alias nano='/usr/local/bin/nano'
-fi
-
 alias home='cd ~ && eza -lh'
 alias desk='cd ~/Desktop && eza -lh'
 alias finder='open .'
 alias chrome='open -a "Google Chrome"'
-alias zed='nano ~/.zshrc'
+alias zed='vim ~/.zshrc'
 
 alias gs='git status --short --branch'
 alias gd='git diff'
