@@ -37,8 +37,5 @@ alias finder='open .'
 alias chrome='open -a "Google Chrome"'
 alias zed='vim ~/.zshrc'
 
-alias gs='git status --short --branch'
-alias gd='git diff'
-alias gl='git log --oneline --decorate --graph --max-count=20'
 alias ll='eza -lah --icons'
 alias la='eza -a --icons'
