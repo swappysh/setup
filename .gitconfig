@@ -1,5 +1,5 @@
 [alias]
-	delete-merged = "\!f() { \
+	delete-merged = "!f() { \
 	  base=\"${1:-origin/main}\"; \
 	  git fetch --prune >/dev/null 2>&1 || true; \
 	  current=\"$(git branch --show-current)\"; \

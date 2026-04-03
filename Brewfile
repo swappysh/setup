@@ -1,0 +1,11 @@
+brew "bat"
+brew "eza"
+brew "gh"
+brew "git"
+brew "node"
+brew "zsh"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+cask "ghostty"
+cask "wezterm"

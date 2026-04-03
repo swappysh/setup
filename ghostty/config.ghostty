@@ -1,0 +1,34 @@
+# Ghostty config that mirrors the current WezTerm setup as closely as possible on macOS.
+
+font-family = MesloLGS Nerd Font Mono
+font-size = 19
+theme = tokyonight_night
+
+window-decoration = auto
+macos-titlebar-style = transparent
+macos-window-buttons = visible
+macos-option-as-alt = true
+
+background-opacity = 0.8
+background-blur = 20
+focus-follows-mouse = true
+scrollback-limit = 104857600
+
+shell-integration = detect
+shell-integration-features = cursor,sudo,ssh-env,ssh-terminfo,title,path
+
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+keybind = cmd+d=new_split:right
+keybind = shift+cmd+d=new_split:down
+keybind = cmd+left=goto_split:previous
+keybind = cmd+right=goto_split:next
+keybind = cmd+alt+left=previous_tab
+keybind = cmd+alt+right=next_tab
+keybind = alt+left=text:\x1bb
+keybind = alt+right=text:\x1bf
+keybind = cmd+s=text:\x1b:w\n
+keybind = shift+enter=text:\x1b\r
+keybind = cmd+comma=open_config

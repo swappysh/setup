@@ -1,80 +1,78 @@
 # Development Environment Setup
 
-Personal configuration files for development tools and terminal setup.
+Fresh-mac bootstrap for this machine. It installs the base tooling, links the tracked dotfiles, and keeps both Ghostty and WezTerm supported.
 
-## WezTerm Configuration
-
-This repository includes a comprehensive WezTerm configuration with advanced features.
-
-### Setup Instructions
+## Quick Start
 
 ```bash
-# Copy WezTerm config to your home directory
-cp .wezterm.lua ~/.wezterm.lua
+git clone git@github.com:swappysh/setup.git
+cd setup
+bash bootstrap.sh
 ```
 
-WezTerm will automatically reload when you save the config file.
+If Xcode Command Line Tools are missing, the script will prompt for them and exit. Rerun `bootstrap.sh` after the install finishes.
 
-### Features
+## What Bootstrap Does
 
-**Visual Appearance:**
-- Font: MesloLGS Nerd Font Mono (size 19)
-- Color scheme: tokyonight_night
-- Window opacity: 80% with macOS blur effect (blur level: 20)
-- Integrated window control buttons (minimize, maximize, close)
-- Tab bar enabled
-- Large scrollback buffer: 100,000 lines
+- Installs Homebrew packages from [Brewfile](./Brewfile): `git`, `gh`, `zsh`, `zsh-autosuggestions`, `zsh-syntax-highlighting`, `eza`, `bat`, and `node`
+- Installs the terminal apps `Ghostty` and `WezTerm`
+- Links the repo-managed dotfiles into your home directory:
+  - [`.zprofile`](./.zprofile)
+  - [`.zshrc`](./.zshrc)
+  - [`.gitconfig`](./.gitconfig)
+  - [`ssh/config`](./ssh/config) to `~/.ssh/config`
+  - [`.wezterm.lua`](./.wezterm.lua)
+  - [`ghostty/config.ghostty`](./ghostty/config.ghostty) to Ghostty's macOS config path
+- Installs `@openai/codex` after Node is available
+- Runs `auth_ergonomics.sh` so you can finish Touch ID, SSH, and GitHub auth setup with explicit prompts
 
-**Pane Management:**
-- `Cmd+D` - Split pane horizontally
-- `Cmd+Shift+D` - Split pane vertically
-- `Cmd+Left/Right Arrow` - Navigate between panes
-- Mouse focus follows pointer automatically
+Existing home files are backed up before being replaced.
 
-**Tab Navigation:**
-- `Cmd+Option+Left/Right Arrow` - Switch between tabs
+## Shell Setup
 
-**Text Navigation:**
-- `Option+Left/Right Arrow` - Jump backward/forward by word
+[`./.zprofile`](./.zprofile) sets up Homebrew for login shells. [`./.zshrc`](./.zshrc) loads the autosuggestions and syntax-highlighting plugins and sets a few practical aliases.
 
-**Editor Integration:**
-- `Cmd+S` - Save in vim (sends `:w\n`)
-- `Shift+Enter` - Multi-line input handling
+If you want Homebrew `zsh` as your login shell, set it explicitly after bootstrap. The repo does not change your account shell for you.
 
-**Configuration:**
-- `Cmd+,` - Quick access to open config file
+## Terminal Setup
 
-**Mouse Features:**
-- `Cmd+Alt+Click` - Block text selection mode
-- `4-click` - Semantic zone selection (selects entire logical block)
+Both WezTerm and Ghostty are tracked in this repo and linked by bootstrap, so you can use either app on the new machine without redoing the setup work.
 
-**Task Notifications:**
-- Terminal can send desktop notifications via `wez_notify` user variable
+The current WezTerm config keeps the same basic preferences:
 
-### Customization
+- MesloLGS Nerd Font Mono at size 19
+- `tokyonight_night`
+- opacity and blur enabled
+- tab bar and pane navigation bindings
+- `eza`/`bat` friendly shell setup
 
-To change the color scheme, modify this line in `.wezterm.lua`:
-```lua
-config.color_scheme = "tokyonight_night"
+## SSH And GitHub
+
+After bootstrap, verify your key and GitHub access:
+
+```bash
+ssh -T git@github.com
+gh auth status -h github.com
 ```
 
-WezTerm includes 735+ built-in color schemes. Popular alternatives: `Batman`, `Dracula`, `Nord`, `Solarized Dark`.
+If you still need a key, create one with `ssh-keygen -t ed25519 -C "you@example.com"`, add the public key to GitHub, and then run `ssh-add --apple-use-keychain ~/.ssh/id_ed25519` so passphrases stay in the macOS Keychain.
 
-### References
+The repo ships a tracked SSH client config in [`ssh/config`](./ssh/config), and bootstrap links it to `~/.ssh/config` so `AddKeysToAgent yes` and `UseKeychain yes` are already in place.
 
-**WezTerm Setup:**
-- Great tutorial: https://www.josean.com/posts/how-to-setup-wezterm-terminal
-- Official docs: https://wezterm.org/config/files.html
+## Sudo Touch ID
 
-## iTerm Setup
+macOS can use Touch ID for `sudo`, but that requires a manual privileged change. Create `/etc/pam.d/sudo_local` yourself and add:
 
-Alternative setup guide: https://gist.github.com/GLMeece/4b51037daa0d6b83256f80b560246f38
+```text
+auth       sufficient     pam_tid.so
+```
 
-## Git Tips
+The bootstrap script runs `auth_ergonomics.sh` to print this reminder, but it does not edit `/etc/pam.d` for you.
 
-**Ignore untracked files locally:**
-https://stackoverflow.com/a/1753078
+## Codex
 
-## iOS Development
+`bootstrap.sh` installs `@openai/codex` after Node is present. If you skip bootstrap, install it manually with `npm install -g @openai/codex`.
 
-Swift language support in Cursor: https://docs.cursor.com/guides/languages/swift
+## Verification
+
+After bootstrap, run `bash verify_setup.sh` to confirm the expected auth and setup pieces are present.
