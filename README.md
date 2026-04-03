@@ -30,7 +30,7 @@ Existing home files are backed up before being replaced.
 
 ## Shell Setup
 
-[`./.zprofile`](./.zprofile) sets up Homebrew for login shells. [`./.zshrc`](./.zshrc) loads the autosuggestions and syntax-highlighting plugins, enables the `oh-my-zsh` `git` plugin when `~/.oh-my-zsh` is present, and keeps a few practical custom aliases on top.
+[`./.zprofile`](./.zprofile) sets up Homebrew for login shells. [`./.zshrc`](./.zshrc) loads the autosuggestions and syntax-highlighting plugins, enables the `oh-my-zsh` `git` plugin when `~/.oh-my-zsh` is present, and carries over the practical shell aliases from the old bash setup.
 
 If you want Homebrew `zsh` as your login shell, set it explicitly after bootstrap. The repo does not change your account shell for you.
 
