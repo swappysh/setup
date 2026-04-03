@@ -89,6 +89,7 @@ link_file "$repo_root/.zprofile" "$HOME/.zprofile"
 link_file "$repo_root/.zshrc" "$HOME/.zshrc"
 link_file "$repo_root/.gitconfig" "$HOME/.gitconfig"
 link_file "$repo_root/ssh/config" "$HOME/.ssh/config"
+link_file "$repo_root/nvim" "$HOME/.config/nvim"
 link_file "$repo_root/.wezterm.lua" "$HOME/.wezterm.lua"
 link_file "$repo_root/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 

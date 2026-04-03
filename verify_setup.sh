@@ -60,8 +60,12 @@ fi
 
 check_command brew
 check_command codex
+check_command nvim
 
 check_link "$HOME/.wezterm.lua" "$repo_root/.wezterm.lua"
+
+check_link "$HOME/.config/nvim" "$repo_root/nvim"
+check_file "$HOME/.config/nvim/init.lua" "Neovim init.lua"
 
 ghostty_config="$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 check_link "$ghostty_config" "$repo_root/ghostty/config.ghostty"
