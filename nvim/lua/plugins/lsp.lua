@@ -3,8 +3,6 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
-      local lspconfig = require("lspconfig")
-
       local on_attach = function(_, bufnr)
         local map = function(keys, func, desc)
           vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
@@ -42,13 +40,10 @@ return {
       }
 
       for server, config in pairs(servers) do
-        config = vim.tbl_deep_extend("force", {
+        vim.lsp.config(server, vim.tbl_deep_extend("force", {
           on_attach = on_attach,
-        }, config)
-
-        if lspconfig[server] then
-          lspconfig[server].setup(config)
-        end
+        }, config))
+        vim.lsp.enable(server)
       end
     end,
   },
