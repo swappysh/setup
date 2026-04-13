@@ -14,3 +14,4 @@ brew "zsh-syntax-highlighting"
 
 cask "ghostty"
 cask "wezterm"
+cask "colima"

@@ -93,6 +93,13 @@ link_file "$repo_root/nvim" "$HOME/.config/nvim"
 link_file "$repo_root/.wezterm.lua" "$HOME/.wezterm.lua"
 link_file "$repo_root/ghostty/config.ghostty" "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 
+log "Starting Colima (required for ssh/config Include)"
+if command -v colima >/dev/null 2>&1; then
+  colima start 2>/dev/null || true
+else
+  warn "colima not found — skipping. Run 'colima start' after installing it."
+fi
+
 log "Auth ergonomics check"
 bash "$repo_root/auth_ergonomics.sh" || true
 

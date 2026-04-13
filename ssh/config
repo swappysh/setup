@@ -1,3 +1,5 @@
+Include /Users/swappysh/.colima/ssh_config
+
 # Repo-managed SSH client config for macOS.
 # Link this file to ~/.ssh/config.
 
