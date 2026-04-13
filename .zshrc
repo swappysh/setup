@@ -39,3 +39,57 @@ alias zed='vim ~/.zshrc'
 
 alias ll='eza -lah --icons'
 alias la='eza -a --icons'
+
+# Securely store a key in macOS Keychain
+key() {
+    if [ -z "$1" ]; then
+        echo "Usage: key <service_name>"
+        return 1
+    fi
+
+    local service_name=$1
+    local api_key
+
+    printf "Enter key for %s: " "$service_name"
+    read -rs api_key
+    echo
+
+    if [ -z "$api_key" ]; then
+        echo "Key cannot be empty."
+        return 1
+    fi
+
+    security add-generic-password -a "$USER" -s "$service_name" -w "$api_key" -U
+    if [ $? -eq 0 ]; then
+        echo "Key added successfully for service: $service_name"
+    else
+        echo "Failed to add key."
+        return 1
+    fi
+}
+
+# Retrieve a key from macOS Keychain
+getkey() {
+    if [ -z "$1" ]; then
+        echo "Usage: getkey <service_name>"
+        return 1
+    fi
+
+    local service_name=$1
+    local api_key
+
+    api_key=$(security find-generic-password -a "$USER" -s "$service_name" -w 2>/dev/null)
+
+    if [ $? -eq 0 ]; then
+        echo "$api_key"
+    else
+        echo "No key found for service: $service_name"
+        return 1
+    fi
+}
+
+# opencode
+export PATH=/Users/swappysh/.opencode/bin:$PATH
+export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(direnv hook zsh)"
