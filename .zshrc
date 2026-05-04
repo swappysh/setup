@@ -93,3 +93,32 @@ export PATH=/Users/swappysh/.opencode/bin:$PATH
 export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 eval "$(direnv hook zsh)"
+aws-refresh() {
+  python3 -c "
+import json, os, glob
+files = glob.glob(os.path.expanduser('~/.aws/login/cache/*.json'))
+if not files:
+    print('No login cache found. Run: aws login')
+    exit(1)
+d = json.load(open(files[0]))['accessToken']
+creds = f'[default]\naws_access_key_id = {d[\"accessKeyId\"]}\naws_secret_access_key = {d[\"secretAccessKey\"]}\naws_session_token = {d[\"sessionToken\"]}'
+open(os.path.expanduser('~/.aws/credentials'), 'w').write(creds)
+print(f'Credentials written. Expires: {d[\"expiresAt\"]}')
+"
+}
+
+# --- Slack MCP Toggle ---
+slack-mcp-on() {
+  echo "Adding Slack MCP server..."
+  claude mcp add slack-mcp https://mcp.slack.com/mcp --transport http
+  echo "✓ Slack MCP server enabled"
+}
+
+slack-mcp-off() {
+  echo "Removing Slack MCP server..."
+  claude mcp remove slack-mcp
+  echo "✓ Slack MCP server disabled"
+}
+# --- End Slack MCP Toggle ---
+
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
