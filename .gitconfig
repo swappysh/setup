@@ -4,6 +4,9 @@
 [includeIf "gitdir:/Users/swappysh/Documents/Personal/"]
 	path = ~/Documents/Personal/setup/.gitconfig-personal
 
+[includeIf "gitdir:/Users/swappysh/Personal/"]
+	path = ~/.gitconfig-mradul
+
 [alias]
 	delete-merged = "!f() {\n  base=\"${1:-origin/main}\";\n  git fetch --prune >/dev/null 2>&1 || true;\n  current=\"$(git branch --show-current)\";\n  merged_prs=\"$(gh pr list --state merged --limit 200 --json headRefName --jq '.[].headRefName' 2>/dev/null)\";\n  for b in $(git for-each-ref --format=\"%(refname:short)\" refs/heads); do\n    [ \"$b\" = \"$current\" ] && continue;\n    case \"$b\" in trunk|main|master|develop) continue ;; esac;\n    delete_flag=\"\";\n    if git merge-base --is-ancestor \"$b\" \"$base\" 2>/dev/null; then\n      delete_flag=\"-d\";\n    elif echo \"$merged_prs\" | grep -qx \"$b\"; then\n      delete_flag=\"-D\";\n    fi;\n    [ -z \"$delete_flag\" ] && continue;\n    wt_path=$(git worktree list --porcelain | awk -v branch=\"refs/heads/$b\" '/^worktree/{path=substr($0,10)} $0==\"branch \"branch{print path}');\n    [ -n \"$wt_path\" ] && git worktree remove --force \"$wt_path\";\n    git branch \"$delete_flag\" \"$b\";\n  done;\n}; f"
 [init]
