@@ -1,0 +1,26 @@
+{
+ "background": {"service_worker": "background.js"},
+ "action": {
+ "default_icon": "icon-128.png",
+ "default_title": "Save"
+ },
+ "name": "Save",
+ "description": "Saves stuff to my page - Created with http://blog.self.li",
+ "homepage_url": "http://blog.self.li/post/16366939413/how-to-convert-bookmarklet-to-chrome-extension",
+ "icons": {
+     "16": "icon-16.png",
+     "48": "icon-48.png",
+     "128": "icon-128.png" },
+ "permissions": [
+     "tabs",
+     "scripting",
+     "storage"
+ ],
+ "host_permissions": [
+     "http://*/*",
+     "https://*/*"
+ ],
+ "options_page": "options.html",
+ "version": "0.3",
+ "manifest_version": 3
+}
