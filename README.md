@@ -95,6 +95,12 @@ The bootstrap script runs `auth_ergonomics.sh` to print this reminder, but it do
 
 `bootstrap.sh` installs `@openai/codex` after Node is present. If you skip bootstrap, install it manually with `npm install -g @openai/codex`.
 
+## Claude Code Skills
+
+Global Claude Code skills live in `~/.agents/skills/<name>/SKILL.md` and are symlinked individually into `~/.claude/skills/<name>` (not tracked by this repo). To reinstall on a new machine, recreate the ones you use:
+
+- `typesafe-ai`: framework for building AI features with typed judgments (System One models). Fetch `https://raw.githubusercontent.com/typesafe-ai/skills/main/skills/typesafe-ai/SKILL.md` into `~/.agents/skills/typesafe-ai/SKILL.md`, then `ln -s ../../.agents/skills/typesafe-ai ~/.claude/skills/typesafe-ai`.
+
 ## Verification
 
 After bootstrap, run `bash verify_setup.sh` to confirm the expected auth and setup pieces are present.
